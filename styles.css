@@ -1,0 +1,107 @@
+/* 
+  styles.css
+  Simple Launch student website template.
+  Students can safely change colors, fonts, spacing, and borders here.
+*/
+
+/* Basic page setup */
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f7fb;
+  color: #222;
+  line-height: 1.6;
+}
+
+/* Header section */
+header {
+  background-color: #662aaa;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+.tagline {
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+/* Navigation menu */
+nav {
+  background-color: #3e187c;
+  text-align: center;
+  padding: 12px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  margin: 0 12px;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+nav a:hover {
+  background-color: white;
+  color: #3e187c;
+}
+
+/* Main content area */
+main {
+  max-width: 900px;
+  margin: 25px auto;
+  padding: 0 20px;
+}
+
+/* Content cards */
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.card h2 {
+  color: #3e187c;
+  margin-top: 0;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Footer */
+footer {
+  background-color: #3e187c;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+
+/* Mobile-friendly layout */
+@media screen and (max-width: 600px) {
+  header h1 {
+    font-size: 28px;
+  }
+
+  nav a {
+    display: block;
+    margin: 6px 0;
+  }
+
+  main {
+    padding: 0 12px;
+  }
+}
