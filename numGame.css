@@ -1,0 +1,60 @@
+.game-card{
+    background-color:#222222 ;
+}
+.game-box{
+    background-color: #494949;
+    border: 3px solid #dbdbdb;
+    border-radius: 12px;
+    border-style: double;
+    padding: 20px;
+    text-align: center;
+}
+.game-box label{
+    font-weight:bold ;
+}
+#numField{
+    background-color: #2e2e2e;
+    color: #dbdbdb;
+    border: none;
+    border-radius: 8px;
+    padding: 10px ;
+    margin: 10px;
+    font-weight: 400;
+    cursor: text;
+    width: 120px;
+    font-size: 18px;
+    text-align: center;
+    font-family: Papyrus,'Times New Roman', Times, serif;
+}
+button{
+    background-color: #2e2e2e;
+    color: #dbdbdb;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    font-family: Papyrus,'Times New Roman', Times, serif;
+}
+button:hover{
+     background-color: #222222;
+    color: #dbdbdb;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    font-family: Papyrus,'Times New Roman', Times, serif;
+}
+#messageText{
+    font-size: 20px;
+    font-weight: bold;
+    color: #b8b8b8;
+}
+#guessCountText{
+    font-weight: bold;
+}
