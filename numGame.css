@@ -1,5 +1,8 @@
 .game-card{
-    background-color:#222222 ;
+ background-color: #2e2e2e;
+ margin: 25px;
+ margin-bottom: 85px;
+ margin-top: 60px;
 }
 .game-box{
     background-color: #494949;
