@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="wordGame.css">
+</head>
+<body>
+     <header>
+        <h1>Word Game</h1>
+        <p class="tagline">tagline</p>
+        </header>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="aboutme.html">About Me</a>
+            <a href="mytown.html">My Town</a>
+            <a href="numgame.html">Number Game</a>
+            <a href="wordGame.html">Word Game</a>
+        </nav>
+
+        <main>
+            <section class="card game-card">
+                <h2>Guess the Word</h2>
+                <p>try to guess the word below</p>
+                <div id="secret-display">
+                    <span>?</span>
+                    <span>?</span>
+                    <span>?</span>
+                    <span>?</span>
+                    <span>?</span>
+                 </div>
+               <label for="guess-field">Your guess:</label>
+               <input type="text" id="guess-field" maxlength="5" placeholder="Guess">
+               <button onclick="checkGuess()">check word</button>
+               <button onclick="startGame()">new game</button>
+
+               <p id="messageText"> Enter a five letter word</p>
+            </section>
+            <section class="card">
+                <h2>Guess History</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Try</th>
+                            <th>Guess</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody">
+                        <!--guess history will be populated here-->
+                    </tbody>
+                </table> 
+            </section>
+            <section class="card">
+                <h2>Letter feedback</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Color</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="correctDemo">Green</td>
+                            <td>Correct letter in correct position</td>
+                        </tr>
+                        <tr>
+                            <td class="closeDemo">Yellow</td>
+                            <td>correct letter in the wrong position</td>
+                        </tr>
+                        <tr>
+                            <td class="wrongDemo">Gray</td>
+                            <td>Letter not in the word</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </section>
+        </main>
+         <footer>
+    <p>Created by Mollie for Launch.</p>
+            <h4>🖤🩶🤍💜</h4>
+
+  </footer>
+</body>
+</html>
