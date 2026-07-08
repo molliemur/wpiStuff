@@ -1,19 +1,95 @@
 .game-card{
     text-align: center;
 }
-#secret-display{
+#secretDisplay {
     margin: 20px 0;
 }
 #secretDisplay span{
     display: inline-block;
-    background-color: #2e2e2e;
-    border: 3px double #dbdbdb;
-    border-radius: 8px;
+    border: 3px ;
     width: 45px;
     height: 45px;
     line-height: 45px;
     margin: 4px;
-    font-size: 26px;
     font-weight: 300;
     font-family: Papyrus,'Times New Roman', Times, serif;
+      border-radius: 8px;
+    background-color: #494949;
+    color: #dbdbdb;
+    font-size: larger;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+input{
+    font-size: 18px;
+    padding: 8px;
+    width: 140px;
+    height: 15px;
+    margin: 8px;
+    text-transform: uppercase;
+    cursor: text;
+    border-radius: 8px;
+    background-color: #494949;
+    color: #666666;
+}
+button{
+ background-color: #494949;
+    color: #dbdbdb;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 6px;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    font-size: 16px;
+    font-family: Papyrus,'Times New Roman', Times, serif;
+}
+button:hover{
+     background-color: #222222;
+    color: #dbdbdb;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-weight: 400;
+    text-align: center;
+    font-family: Papyrus,'Times New Roman', Times, serif;
+}
+table{
+    width: 100%;
+    margin-top: 12px;
+    border-collapse: collapse;
+
+}
+th {
+    background-color:#222222
+    
+}
+td, th{
+    border: 1px;
+    text-align: center;
+    padding: 10px;
+}
+.correct,
+.correct-demo{
+    background-color: #228064;
+}
+.close,.close-demo{
+    background-color: #dabc45;
+}
+.wrong,.wrong-demo{
+    background-color: #494949
+}
+.letter-box{
+    display: inline-block;
+    border-radius: 6px;
+    padding: 8px 11px;
+    margin: 2px;
+    font-weight: 600;
+    color: #dbdbdb;
+
 }

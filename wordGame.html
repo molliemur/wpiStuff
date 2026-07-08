@@ -24,15 +24,15 @@
             <section class="card game-card">
                 <h2>Guess the Word</h2>
                 <p>try to guess the word below</p>
-                <div id="secret-display">
+                <div id="secretDisplay">
                     <span>?</span>
                     <span>?</span>
                     <span>?</span>
                     <span>?</span>
                     <span>?</span>
                  </div>
-               <label for="guess-field">Your guess:</label>
-               <input type="text" id="guess-field" maxlength="5" placeholder="Guess">
+               <label for="guessField">Your guess:</label>
+               <input type="text" id="guessField" maxlength="5" placeholder="Guess">
                <button onclick="checkGuess()">check word</button>
                <button onclick="startGame()">new game</button>
 
@@ -64,15 +64,15 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="correctDemo">Green</td>
+                            <td class="correct-demo">Green</td>
                             <td>Correct letter in correct position</td>
                         </tr>
                         <tr>
-                            <td class="closeDemo">Yellow</td>
+                            <td class="close-demo">Yellow</td>
                             <td>correct letter in the wrong position</td>
                         </tr>
                         <tr>
-                            <td class="wrongDemo">Gray</td>
+                            <td class="wrong-demo">Gray</td>
                             <td>Letter not in the word</td>
                         </tr>
                     </tbody>
@@ -83,7 +83,7 @@
          <footer>
     <p>Created by Mollie for Launch.</p>
             <h4>🖤🩶🤍💜</h4>
-
   </footer>
+  <script src="wordGame.js"> </script>
 </body>
 </html>
