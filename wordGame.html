@@ -6,6 +6,8 @@
     <title>Word Game</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="wordGame.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
 </head>
 <body>
      <header>
@@ -25,19 +27,23 @@
                 <h2>Guess the Word</h2>
                 <p>try to guess the word below</p>
                 <div id="secretDisplay">
-                    <span>?</span>
-                    <span>?</span>
-                    <span>?</span>
-                    <span>?</span>
-                    <span>?</span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
                  </div>
                <label for="guessField">Your guess:</label>
                <input type="text" id="guessField" maxlength="5" placeholder="Guess">
                <button onclick="checkGuess()">check word</button>
                <button onclick="startGame()">new game</button>
+               <button onclick="hardMode()">Hard Mode</button>
 
-               <p id="messageText"> Enter a five letter word</p>
-            </section>
+
+                <p id="messageText"> Enter a five letter word</p>
+               <input type="file" id="wordListFile" accept=".txt">
+               <button onclick="importWordListFile()"> Import Word List</button> 
+            </section> 
             <section class="card">
                 <h2>Guess History</h2>
                 <table>

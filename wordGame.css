@@ -22,7 +22,7 @@
     margin-bottom: 10px;
     text-align: center;
 }
-input{
+input::placeholder{
     font-size: 18px;
     padding: 8px;
     width: 140px;
@@ -33,6 +33,18 @@ input{
     border-radius: 8px;
     background-color: #494949;
     color: #666666;
+}
+input{
+    font-size: 18px;
+    padding: 8px;
+    width: 140px;
+    height: 15px;
+    margin: 8px;
+    text-transform: uppercase;
+    cursor: text;
+    border-radius: 8px;
+    background-color: #494949;
+    color: #dbdbdb;
 }
 button{
  background-color: #494949;
@@ -91,5 +103,17 @@ td, th{
     margin: 2px;
     font-weight: 600;
     color: #dbdbdb;
+
+}
+input::file-selector-button{
+    background-color: #494949;
+    border: none;
+    padding: none;
+    margin: none;
+    width: 145px;
+    color: #dbdbdb;
+    font-family: Papyrus,'Times New Roman', Times, serif;
+    text-align: center;
+    cursor:pointer;
 
 }
