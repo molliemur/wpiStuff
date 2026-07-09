@@ -1,4 +1,4 @@
-let words = ["words","guess","lives",]
+let words = []
 const letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 let secretWord =""
 let tries = 0;
@@ -8,6 +8,13 @@ const messageText = document.getElementById("messageText");
 const historyTableBody = document.getElementById("historyTableBody")
 const secretDisplay = document.getElementById("secretDisplay")
 const wordListFile = document.getElementById("wordListFile")
+let myConfetti = null;
+if(window.confetti){
+    myConfetti= confetti.create(null, {
+        resize: true,
+        useWorker: true
+    });
+}
 
 
 function hardMode(){
@@ -23,16 +30,32 @@ secretWord = hardWord.toString();
 console.log("secret word:", secretWord);
 mode=false;
 }
-function startGame(){
-    if(mode===false){
-        secretWord = words[Math.floor(Math.random()*words.length)];
-        console.log("secret word: ", secretWord)
+async function getRandomWord() {
+    try{
+        const response = await fetch("https://random-word-api.herokuapp.com/word?length=5&number=20")
+        const data = await response.json();
+        return data
+
+    } catch(error){
+        console.error("error fetching random word", error);
+        return null;
     }
-    tries =0;
+}
+async function startGame() {
+     if(mode===false){
+        words = await getRandomWord();
+        secretWord = words[Math.floor(Math.random()*words.length)];
+        console.log("secret word:", secretWord);
+        if(!secretWord){
+            messageText.textContent = "your a failure try again"
+            return;
+        }
+    }
+            tries =0;
     guessField.value="";
-    guessField.value=0;
     historyTableBody.innerHTML="";
     hideSecretWord();
+    
 }
 
 
@@ -66,6 +89,12 @@ function checkGuess(){
     if(guess === secretWord){
         messageText.textContent = "yay";
             showSecretWord();
+            if(myConfetti){
+            myConfetti({
+                particalCount:100,
+                spread:160
+            });
+        }
     } else{
         addGuessToTable(guess, resultHTML);
         messageText.textContent = "nope";
@@ -79,6 +108,7 @@ function buildLetterFeedback(guess){
         let cssClass = "";
         if(letter === secretWord[i]){
             cssClass ="correct";
+            
         }else if(secretWord.includes(letter)){
             cssClass="close";
         }else{
