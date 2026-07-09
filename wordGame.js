@@ -1,31 +1,33 @@
 let words = ["words","guess","lives",]
-const letters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+const letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
 let secretWord =""
 let tries = 0;
-let mode
+let mode=false;
 const guessField = document.getElementById("guessField");
 const messageText = document.getElementById("messageText");
 const historyTableBody = document.getElementById("historyTableBody")
 const secretDisplay = document.getElementById("secretDisplay")
 const wordListFile = document.getElementById("wordListFile")
 
-// function easyMode(){
-// mode =words;
-// }
-// function hardMode(){
-// const hardLetter1 = letters[Math.floor(Math.random()*letters.length)];
-// const hardLetter2 = letters[Math.floor(Math.random()*letters.length)];
-// const hardLetter3 = letters[Math.floor(Math.random()*letters.length)];
-// const hardLetter4 = letters[Math.floor(Math.random()*letters.length)];
-// const hardLetter5 = letters[Math.floor(Math.random()*letters.length)];
-// secretWord = hardLetter1+hardLetter2+hardLetter3+hardLetter4+hardLetter5;
-// console.log("secret word:", secretWord);
-// }
-function startGame(){
-   if(mode===words){ 
-    secretWord = words[Math.floor(Math.random()*words.length)];
-        console.log("secret word: ", secretWord)
+
+function hardMode(){
+mode = true;
+startGame();
+const hardLetter1 = letters[Math.floor(Math.random()*letters.length)];
+const hardLetter2 = letters[Math.floor(Math.random()*letters.length)];
+const hardLetter3 = letters[Math.floor(Math.random()*letters.length)];
+const hardLetter4 = letters[Math.floor(Math.random()*letters.length)];
+const hardLetter5 = letters[Math.floor(Math.random()*letters.length)];
+hardWord = [hardLetter1+hardLetter2+hardLetter3+hardLetter4+hardLetter5]
+secretWord = hardWord.toString();
+console.log("secret word:", secretWord);
+mode=false;
 }
+function startGame(){
+    if(mode===false){
+        secretWord = words[Math.floor(Math.random()*words.length)];
+        console.log("secret word: ", secretWord)
+    }
     tries =0;
     guessField.value="";
     guessField.value=0;
@@ -33,19 +35,7 @@ function startGame(){
     hideSecretWord();
 }
 
-function easyMode(){
-mode =words;
-startGame();
-}
-function hardMode(){
-const hardLetter1 = letters[Math.floor(Math.random()*letters.length)];
-const hardLetter2 = letters[Math.floor(Math.random()*letters.length)];
-const hardLetter3 = letters[Math.floor(Math.random()*letters.length)];
-const hardLetter4 = letters[Math.floor(Math.random()*letters.length)];
-const hardLetter5 = letters[Math.floor(Math.random()*letters.length)];
-secretWord = hardLetter1+hardLetter2+hardLetter3+hardLetter4+hardLetter5;
-console.log("secret word:", secretWord);
-}
+
 function hideSecretWord(){
     secretDisplay.textContent=" ";
     for(let i=0; i< secretWord.length; i++){
@@ -55,6 +45,7 @@ function hideSecretWord(){
     }
 }
 function showSecretWord(){
+    // secretWord=secretWord.toUpperCase
     secretDisplay.textContent=" ";
     for (let i=0; i<secretWord.length; i++){
         let box = document.createElement("span");
@@ -65,6 +56,7 @@ function showSecretWord(){
 }
 function checkGuess(){
     const guess = guessField.value.toLowerCase();
+    // secretWord=secretWord.toLowerCase();
     tries++;
     if(guess.length !== secretWord.length){
         messageText.textContent = "please enter a 5 letter word";
@@ -118,13 +110,13 @@ function importWordListFile(){
     let reader = new FileReader();
     reader.onload = function(event){
         let fileText = event.target.result;
-        let importedWords = [];
+        let importedWords = fileText.split("\n");
         let validWords=[];
 
         for (let i = 0;  i < importedWords.length; i++) {
-            let word = importedWords[i].trim().toLowerCase();
-            if(word.length === 5){
-                validWords.push(word);
+            let words = importedWords[i].trim().toLowerCase();
+            if(words.length === 5){
+                validWords.push(words);
             }
         }
         if(validWords.length===0){
@@ -133,8 +125,11 @@ function importWordListFile(){
         }
         words = validWords;
         messageText.innerHTML = "imported " + validWords.length +" words. starting new game."
+        
         startGame();
     }
+    reader.readAsText(file);
 }
-
+if(mode===false){
 startGame();
+}

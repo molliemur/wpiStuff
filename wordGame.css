@@ -93,3 +93,6 @@ td, th{
     color: #dbdbdb;
 
 }
+input::file-selector-button{
+    background-color: #666666;
+}
