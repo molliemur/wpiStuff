@@ -14,6 +14,14 @@
         <h1>Word Game</h1>
         <p class="tagline">tagline</p>
         </header>
+        <section class="card">
+        <h2>Paste your wpi api key below the key is saved only in this browser using: <code> localStorage</code></h2>
+        <label for="apiKeyField">Wpi Api key:</label>
+        <input type="password" id="apiKeyField" placeholder="Enter your api key">
+        <button onclick="saveApiKey()"> save api key</button>
+        <button onclick="clearApiKey()"> clear api key</button>
+        <p>dont publish your api Key on githuub or share it with others</p>
+        </section>
         <nav>
             <a href="index.html">Home</a>
             <a href="aboutme.html">About Me</a>
@@ -38,10 +46,13 @@
                <button onclick="checkGuess()">check word</button>
                <button onclick="startGame()">new game</button>
                <button onclick="hardMode()">Hard Mode</button>
+               <button onclick="askForHint()" >ask ai for Hint</button>
 
 
                 <p id="messageText"> Enter a five letter word</p>
-               <input type="file" id="wordListFile" accept=".txt">
+                <p id="hintText"></p>
+             
+                <input type="file" id="wordListFile" accept=".txt">
                <button onclick="importWordListFile()"> Import Word List</button> 
             </section> 
             <section class="card">
