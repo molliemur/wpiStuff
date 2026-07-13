@@ -188,8 +188,8 @@ async function askQwen(prompt) {
     const response = await fetch(WPI_QWEN_URL,{
       method:"POST",
       headers:{
-        "auth": `Bearer${apiKey}`,
-        "ContentType": "application/json"
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
       },
       body:JSON.stringify({
         model: WPI_QWEN_MODEL, 
@@ -204,16 +204,18 @@ async function askQwen(prompt) {
         temperature: 0.7,
         max_tokens:200,
         stream: false,
-        chat_temperature_kwargs:{
-            enable_thinking:false``
+        chat_template_kwargs:{
+            enable_thinking:false
         }
       })
     });
     if(!response.ok){
+        console.log(response)
         throw new Error("failed to fetch response from Qwen api");
     }
     const data = await response.json();
-    return data.choice[0].message.content.trim();
+    console.log(data.choices[0].message.content.trim())
+    return data.choices[0].message.content.trim();
 }
 async function askForHint() {
   if(!secretWord){
@@ -223,15 +225,21 @@ async function askForHint() {
     const prompt = `The secret word is "${secretWord}"\
     Give one short hint for a 9th grader to guess the word\
     do not revel the word or any letters \
-    the hint should be a single sentence`;
+    the hint should be 1-2 sentences and needs to rhyme`;
     hintText.innerHTML="Asking AI for a hint..."
   try{
     const response = await askQwen(prompt);
     hintText.innerHTML = response;
   }catch(error){
-    hintText.innerHTML="error fetching hint from ai"
+    hintText.innerHTML="error fetching hint from ai"+error
   }
 }
+// guessField.addEventListener('keypress',function(event){
+//     if(event.key==='Enter'){
+//         makeGuess();
+//     }
+//     return;
+// });
 loadPage();
 if(mode===false){
 startGame();
