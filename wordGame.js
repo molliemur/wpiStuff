@@ -17,10 +17,9 @@ const secretDisplay = document.getElementById("secretDisplay")
 const wordListFile = document.getElementById("wordListFile")
 const apiKeyField = document.getElementById("apiKeyField");
 const wordLengthInput = document.getElementById("wordLength")
-
 let hintText = document.getElementById("hintText");
-let myConfetti = null;
 
+let myConfetti = null;
 if(window.confetti){
     myConfetti= confetti.create(null, {
         resize: true,
