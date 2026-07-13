@@ -1,18 +1,26 @@
 const WPI_QWEN_URL = "https://ggpt-llm-p-u02.int.wpi.edu/v1/chat/completions";
 const WPI_QWEN_MODEL = "qwen-cli";
+
 let words = []
-const letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+const letters = [
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+
 let secretWord =""
 let tries = 0;
 let mode=false;
+let wordLength = 5;
+
 const guessField = document.getElementById("guessField");
 const messageText = document.getElementById("messageText");
 const historyTableBody = document.getElementById("historyTableBody")
 const secretDisplay = document.getElementById("secretDisplay")
 const wordListFile = document.getElementById("wordListFile")
 const apiKeyField = document.getElementById("apiKeyField");
+const wordLengthInput = document.getElementById("wordLength")
+
 let hintText = document.getElementById("hintText");
 let myConfetti = null;
+
 if(window.confetti){
     myConfetti= confetti.create(null, {
         resize: true,
@@ -20,7 +28,11 @@ if(window.confetti){
     });
 }
 
-
+function submitWordLength(){
+        wordLength = wordLengthInput.value;
+        console.log(wordLength)
+        startGame();
+}
 function hardMode(){
 mode = true;
 startGame();
@@ -36,7 +48,7 @@ mode=false;
 }
 async function getRandomWord() {
     try{
-        const response = await fetch("https://random-word-api.herokuapp.com/word?length=5&number=20")
+        const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}&number=20`)
         const data = await response.json();
         return data
 
@@ -61,8 +73,6 @@ async function startGame() {
     hideSecretWord();
     
 }
-
-
 function hideSecretWord(){
     secretDisplay.textContent=" ";
     for(let i=0; i< secretWord.length; i++){
@@ -72,7 +82,6 @@ function hideSecretWord(){
     }
 }
 function showSecretWord(){
-    // secretWord=secretWord.toUpperCase
     secretDisplay.textContent=" ";
     for (let i=0; i<secretWord.length; i++){
         let box = document.createElement("span");
@@ -83,10 +92,9 @@ function showSecretWord(){
 }
 function checkGuess(){
     const guess = guessField.value.toLowerCase();
-    // secretWord=secretWord.toLowerCase();
     tries++;
     if(guess.length !== secretWord.length){
-        messageText.textContent = "please enter a 5 letter word";
+        messageText.textContent = `please enter a ${wordLength} letter word`;
         return;
     }
     resultHTML = buildLetterFeedback(guess);
@@ -149,7 +157,7 @@ function importWordListFile(){
 
         for (let i = 0;  i < importedWords.length; i++) {
             let words = importedWords[i].trim().toLowerCase();
-            if(words.length === 5){
+            if(words.length === wordLength){
                 validWords.push(words);
             }
         }
@@ -234,12 +242,6 @@ async function askForHint() {
     hintText.innerHTML="error fetching hint from ai"+error
   }
 }
-// guessField.addEventListener('keypress',function(event){
-//     if(event.key==='Enter'){
-//         makeGuess();
-//     }
-//     return;
-// });
 loadPage();
 if(mode===false){
 startGame();

@@ -42,14 +42,18 @@
                     <span></span>
                  </div>
                <label for="guessField">Your guess:</label>
-               <input type="text" id="guessField" maxlength="5" placeholder="Guess">
+               <input type="text" id="guessField" maxlength=15 placeholder="Guess">
                <button onclick="checkGuess()">check word</button>
                <button onclick="startGame()">new game</button>
                <button onclick="hardMode()">Hard Mode</button>
                <button onclick="askForHint()" >ask ai for Hint</button>
+               <input type="number" id="wordLength" maxlength="2" placeholder="Length">
+                <button onclick="submitWordLength()">Submit</button>
 
 
-                <p id="messageText"> Enter a five letter word</p>
+
+
+                <p id="messageText"> Enter a word</p>
                 <p id="hintText"></p>
              
                 <input type="file" id="wordListFile" accept=".txt">
