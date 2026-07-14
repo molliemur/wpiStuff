@@ -5,8 +5,8 @@ class PongGame{
         this.scoreboard= document.getElementById("scoreboard");
         this.resetbutton=document.getElementById("reset");
 
-        this.boardWidth = 500;
-        this.boardHeight = 500;
+        this.boardWidth = 814;
+        this.boardHeight =622.594;
 
         this.paddleWidth = 25;
         this.paddleHeight = 100;
@@ -27,10 +27,12 @@ class PongGame{
         this.rightPaddle,
         this.paddleSpeed
     );
-        this.resetButton.addEventListener("click", () => this.resetGame());
-        // this.updateScore();
+    this.score=new Score();
+    this.createObjects();
+        this.resetbutton.addEventListener("click", () => this.resetGame());
+        this.updateScore();
         this.draw();
-        // this.start();
+        this.start();
     }   createObjects(){
         
         this.leftPaddle= new Paddle(
@@ -38,7 +40,7 @@ class PongGame{
             this.boardHeight/2 - this.paddleHeight/2,
             this.paddleHeight,
             this.paddleWidth,
-            "#7F1734",
+            "#FDBCB4",
             this.boardHeight
         );
     
@@ -62,23 +64,74 @@ class PongGame{
             this.ballSpeed* direction,
             this.ballSpeed*verticalDirection,
             this.ballRadius,
-            "#3e187c"
+            "#DABC45"
         )
-    }
-    resetGame(){
-        this.stop();
-        this.score.reset();
     }
     clearBoard(){
         this.ctx.fillStyle = "#494949"
         this.ctx.fillRect(0, 0, this.boardWidth, this.boardHeight);
     }
     draw(){
-        // this.clearBoard();
+        this.clearBoard();
         this.ball.draw(this.ctx)
         this.leftPaddle.draw(this.ctx);
         this.rightPaddle.draw(this.ctx)
     }
+    start(){
+        this.timerId=setInterval(()=>this.gameLoop(),10);
+    }
+    stop(){
+        if(this.timerId!==null){
+            clearInterval(this.timerId)
+            this.timerId=null
+        }
+    }
+    gameLoop(){
+        this.update();
+        this.draw();
+    }
+    update(){
+        this.leftPaddle.move();
+        this.rightPaddle.move();
+        this.ball.bounceOffTopAndBottom(this.boardHeight);
+        this.ball.bounceOffLeftPaddle(this.leftPaddle);
+        this.ball.bounceOffRightPaddle(this.rightPaddle);
+        this.ball.move();
+        this.checkScore();
+    }
+    updateScore(){
+        this.scoreboard.innerHTML=this.score.getScore();
+        }
+        checkScore(){
+            if(this.ball.isPastLeftWall()){
+                this.score.rightScore();
+                this.afterScore();
+            }
+            if(this.ball.isPastRightWall(this.boardWidth)){
+                this.score.leftScore();
+                this.afterScore();
+            }
+       
+        }
+        afterScore(){
+                this.updateScore();
+                this.resetPaddles();
+                this.resetBall();
+            }
+        resetPaddles(){
+                const centerY = this.boardHeight/2-this.paddleHeight/2;
+                this.leftPaddle.reset(centerY);
+                this.rightPaddle.reset(centerY);
+            }
+        resetGame(){
+            this.stop
+            this.score.reset
+            this.updateScore
+            this.resetPaddles
+            this.resetBall
+            this.draw;
+            this.start
+            }
 }
 
 

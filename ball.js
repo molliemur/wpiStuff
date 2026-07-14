@@ -2,11 +2,14 @@ class Ball{
     constructor(x,y,vx,vy,radius,color){
         this.x=x
         this.y=y;
+        this.vx=vx;
+        this.vy=vy;
         this.radius=radius;
         this.color=color
     }
     draw(ctx){
         ctx.fillStyle=this.color
+        ctx.strokeStyle = "black"
         ctx.lineWidth = 2;
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
@@ -37,7 +40,7 @@ class Ball{
         if(ballBottom<paddleTop) return false;
         if(ballTop>paddleBottom) return false;
         if(this.vx < 0){
-            this.vx=Math.ads(this.vx);
+            this.vx=Math.abs(this.vx);
         }
         return true
     }
@@ -53,14 +56,14 @@ class Ball{
         if(ballBottom < paddleTop) return false;
         if(ballTop > paddleBottom) return false;
         if(this.vx > 0){
-            this.vx=-Math.ads(this.vx);
+            this.vx=-Math.abs(this.vx);
         }
         return true
     }
     isPastLeftWall(){
         return this.x+this.radius<0;
     }
-    isPastRightWall(){
+    isPastRightWall(boardWidth){
         return this.x-this.radius>boardWidth;
     }
 }

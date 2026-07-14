@@ -12,7 +12,7 @@ class Paddle{
         ctx.fillStyle=this.color;
         ctx.strokeStyle = "black";
         ctx.fillRect(this.x,this.y,this.width,this.height,);
-        ctx.strokeReact(this.x,this.y,this.width,this.height);
+        ctx.strokeRect(this.x,this.y,this.width,this.height);
     }
     move(){
         const newY = this.y +this.vy;
@@ -25,6 +25,7 @@ class Paddle{
             return;
         }
         this.y=newY
+        console.log(this.color);
     }
     moveUp(speed){
         this.vy=-speed

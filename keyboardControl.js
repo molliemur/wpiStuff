@@ -11,13 +11,11 @@ class KeyboardControls{
 
         window.addEventListener("keydown", (event)=> this.keyDown(event));
         window.addEventListener("keyup", (event)=> this.keyup(event));
-
-
     }
-
     keyDown(event){
         switch(event.key){
             case this.UP_ARROW:
+                console.log("up")
                 this.rightPaddle.moveUp(this.speed);
                 break;
             case this.DOWN_ARROW:
@@ -47,6 +45,8 @@ class KeyboardControls{
             case this.S_KEY.toUpperCase():
                 this.leftPaddle.stop();
                 break;
+                default:
+                    break;
 
         }
     }
