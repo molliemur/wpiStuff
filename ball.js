@@ -42,19 +42,25 @@ class Ball{
         return true
     }
     bounceOffRightPaddle(paddle, paddleForce){
-        const ballRight = this.x+this.radius;
+        const ballRight = this.x-this.radius;
         const ballTop = this.y-this.radius;
         const ballBottom = this.y+this.radius;
 
-        const paddleLeft = paddle.x-paddle.lineWidth;
+        const paddleLeft = paddle.x;
         const paddleTop = paddle.y;
         const paddleBottom=paddle.y+paddle.height;
-        if(ballRight>paddleLeft) return false;
-        if(ballBottom<paddleTop) return false;
-        if(ballTop>paddleBottom) return false;
-        if(this.vx < 0){
-            this.vx=Math.ads(this.vx);
+        if(ballRight < paddleLeft) return false;
+        if(ballBottom < paddleTop) return false;
+        if(ballTop > paddleBottom) return false;
+        if(this.vx > 0){
+            this.vx=-Math.ads(this.vx);
         }
         return true
+    }
+    isPastLeftWall(){
+        return this.x+this.radius<0;
+    }
+    isPastRightWall(){
+        return this.x-this.radius>boardWidth;
     }
 }
