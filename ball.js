@@ -28,12 +28,12 @@ class Ball{
             this.vy=-Math.abs(this.vy);
         }
     }
-    bounceOffLeftPaddle(paddle, paddleForce){
+    bounceOffLeftPaddle(paddle){
         const ballLeft = this.x-this.radius;
         const ballTop = this.y-this.radius;
         const ballBottom = this.y+this.radius;
 
-        const paddleRight = paddle.x+paddle.lineWidth
+        const paddleRight = paddle.x+paddle.width
         const paddleTop = paddle.y;
         const paddleBottom=paddle.y+paddle.height;
         if(ballLeft>paddleRight) return false;
@@ -44,8 +44,8 @@ class Ball{
         }
         return true
     }
-    bounceOffRightPaddle(paddle, paddleForce){
-        const ballRight = this.x-this.radius;
+    bounceOffRightPaddle(paddle){
+        const ballRight = this.x+this.radius;
         const ballTop = this.y-this.radius;
         const ballBottom = this.y+this.radius;
 

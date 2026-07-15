@@ -27,8 +27,6 @@ class PongGame{
         this.rightPaddle,
         this.paddleSpeed
     );
-    this.score=new Score();
-    this.createObjects();
         this.resetbutton.addEventListener("click", () => this.resetGame());
         this.updateScore();
         this.draw();
@@ -124,13 +122,13 @@ class PongGame{
                 this.rightPaddle.reset(centerY);
             }
         resetGame(){
-            this.stop
-            this.score.reset
-            this.updateScore
-            this.resetPaddles
-            this.resetBall
-            this.draw;
-            this.start
+            this.stop()
+            this.score.reset()
+            this.updateScore()
+            this.resetPaddles()
+            this.resetBall()
+            this.draw()
+            this.start()
             }
 }
 

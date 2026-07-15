@@ -4,8 +4,8 @@ constructor(){
     this.right=0
 }
 reset(){
-    this.left=0
-    this.right=0
+    this.left=0;
+    this.right=0;
 }
 leftScore(){
     this.left++

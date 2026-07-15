@@ -25,10 +25,10 @@ class Paddle{
             return;
         }
         this.y=newY
-        console.log(this.color);
     }
     moveUp(speed){
         this.vy=-speed
+        console.log(this.vy)
     }
     moveDown(speed){
         this.vy=speed
