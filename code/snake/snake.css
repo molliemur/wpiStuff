@@ -1,0 +1,38 @@
+body{
+    text-align: center;
+    align-items: center;
+}
+.snake-card{
+    background-color: transparent;
+    border: none;
+    width: 500px;
+    margin: 0 auto;
+}
+.heading{
+    background-color: #ff0075;
+    width: 100%;
+    padding: 20px;
+    display:flex;
+    justify-content:space-between;
+    box-sizing:border-box;
+}
+#gameboard{
+    background-color: #6f6f6f;
+    height: 500px;
+    width: 100%;
+    display: grid;
+    grid-template:repeat(16,1fr)/repeat(16,1fr);
+}
+#current-score,#high-score,#custom-btn{
+    font-size: 20px;
+}
+#snake-name{margin: 0 auto;}
+button{
+    background-color: #b81c1c;
+    padding: 5px;
+    border-radius: 2px;
+    margin: 0 auto;
+}
+button:hover{
+    cursor: pointer;
+}

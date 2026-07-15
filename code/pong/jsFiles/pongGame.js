@@ -13,7 +13,7 @@ class PongGame{
         this.paddleSpeed = 5;
 
         this.ballRadius =12.5;
-        this.ballSpeed = 1;
+        this.ballSpeed = 2;
 
         this.timerId=null;
 
