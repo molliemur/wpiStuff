@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <link rel="stylesheet" href="../main/styles.css">
+    <link rel="stylesheet" href="snake.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+</head>
+<body>
+     <header>
+        <h1>snake Game</h1>
+        <p class="tagline">Use the arrow keys to control the snake and eat the food
+        </p>
+        </header>
+        <nav>
+            <a href="../main/html/index.html">Home</a>
+            <a href="../main/html/aboutme.html">About Me</a>
+            <a href="../main/html/mytown.html">My Town</a>
+            <a href="../numGame/numgame.html">Number Game</a>
+            <a href="../wordGame/wordGame.html">Word Game</a>
+            <a href="../pong/pongGame.html"> Pong Game</a>
+            <a href="snake.html">Snake</a>
+        </nav>
+
+        <main>
+           <section class="snakeCard">
+            <h1 id="snakeName">Snake Game</h1>
+            <div class="heading"> 
+                <span id="currentScore"> Score: 0</span>
+                <button id="customBtn">Customize</button>
+                <span id="highScore" >High Score: 0</span>
+            </div>
+            <div id="gameboard"></div>
+           </section>
+        </main>
+         <footer>
+    <p>Created by Mollie for Frontiers.</p>
+            <h4>🖤🩶🤍💜</h4>
+  </footer>
+  <script src="jsFiles/snakeControls.js"></script>
+  <script src="jsFiles/food.js" ></script>
+  <script src="jsFiles/snake.js"></script>
+  <script src="jsFiles/snakeGame.js"></script>
+</body>
+</html>

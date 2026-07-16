@@ -1,13 +1,24 @@
+const WPI_QWEN_URL = "https://ggpt-llm-p-u02.int.wpi.edu/v1/chat/completions";
+const WPI_QWEN_MODEL = "qwen-cli";
+
 let words = []
-const letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+const letters = [
+    "a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+
 let secretWord =""
 let tries = 0;
 let mode=false;
+let wordLength = 5;
+
 const guessField = document.getElementById("guessField");
 const messageText = document.getElementById("messageText");
 const historyTableBody = document.getElementById("historyTableBody")
 const secretDisplay = document.getElementById("secretDisplay")
 const wordListFile = document.getElementById("wordListFile")
+const apiKeyField = document.getElementById("apiKeyField");
+const wordLengthInput = document.getElementById("wordLength")
+let hintText = document.getElementById("hintText");
+
 let myConfetti = null;
 if(window.confetti){
     myConfetti= confetti.create(null, {
@@ -16,7 +27,11 @@ if(window.confetti){
     });
 }
 
-
+function submitWordLength(){
+        wordLength = wordLengthInput.value;
+        console.log(wordLength)
+        startGame();
+}
 function hardMode(){
 mode = true;
 startGame();
@@ -32,7 +47,7 @@ mode=false;
 }
 async function getRandomWord() {
     try{
-        const response = await fetch("https://random-word-api.herokuapp.com/word?length=5&number=20")
+        const response = await fetch(`https://random-word-api.herokuapp.com/word?length=${wordLength}&number=20`)
         const data = await response.json();
         return data
 
@@ -57,8 +72,6 @@ async function startGame() {
     hideSecretWord();
     
 }
-
-
 function hideSecretWord(){
     secretDisplay.textContent=" ";
     for(let i=0; i< secretWord.length; i++){
@@ -68,7 +81,6 @@ function hideSecretWord(){
     }
 }
 function showSecretWord(){
-    // secretWord=secretWord.toUpperCase
     secretDisplay.textContent=" ";
     for (let i=0; i<secretWord.length; i++){
         let box = document.createElement("span");
@@ -79,10 +91,9 @@ function showSecretWord(){
 }
 function checkGuess(){
     const guess = guessField.value.toLowerCase();
-    // secretWord=secretWord.toLowerCase();
     tries++;
     if(guess.length !== secretWord.length){
-        messageText.textContent = "please enter a 5 letter word";
+        messageText.textContent = `please enter a ${wordLength} letter word`;
         return;
     }
     resultHTML = buildLetterFeedback(guess);
@@ -145,7 +156,7 @@ function importWordListFile(){
 
         for (let i = 0;  i < importedWords.length; i++) {
             let words = importedWords[i].trim().toLowerCase();
-            if(words.length === 5){
+            if(words.length === wordLength){
                 validWords.push(words);
             }
         }
@@ -160,6 +171,77 @@ function importWordListFile(){
     }
     reader.readAsText(file);
 }
+function loadPage(){
+    const savedApiKey= localStorage.getItem("wpiQwenApiKey") || "";
+    apiKeyField.value = savedApiKey;
+    hideSecretWord();
+
+}
+function saveApiKey(){
+    localStorage.setItem("wpiQwenApiKey", apiKeyField.value);
+    messageText.textContent="saved api key"
+}
+function clearApiKey(){
+    localStorage.removeItem("wpiQwenApiKey");
+    apiKeyField.value="";
+    messageText.textContent= "api cleared from local storage"
+}
+async function askQwen(prompt) {
+    const apiKey = localStorage.getItem("wpiQwenApiKey")||apiKeyField.value;
+    if(!apiKey){
+        messageText.textContent ="please enter your api key"
+        throw new Error("Missing Qwen api key")
+    }
+    const response = await fetch(WPI_QWEN_URL,{
+      method:"POST",
+      headers:{
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
+      body:JSON.stringify({
+        model: WPI_QWEN_MODEL, 
+        messages:[{
+            role:"system",
+            content:"/no_think You are helping students play a simple word guessing game. follow the directions exactly"
+        },
+    {
+        role:"user",
+        content:prompt
+    }],
+        temperature: 0.7,
+        max_tokens:200,
+        stream: false,
+        chat_template_kwargs:{
+            enable_thinking:false
+        }
+      })
+    });
+    if(!response.ok){
+        console.log(response)
+        throw new Error("failed to fetch response from Qwen api");
+    }
+    const data = await response.json();
+    console.log(data.choices[0].message.content.trim())
+    return data.choices[0].message.content.trim();
+}
+async function askForHint() {
+  if(!secretWord){
+    messageText.textContent="Please enter a word first"
+    return
+  }
+    const prompt = `The secret word is "${secretWord}"\
+    Give one short hint for a 9th grader to guess the word\
+    do not revel the word or any letters \
+    the hint should be 1-2 sentences and needs to rhyme`;
+    hintText.innerHTML="Asking AI for a hint..."
+  try{
+    const response = await askQwen(prompt);
+    hintText.innerHTML = response;
+  }catch(error){
+    hintText.innerHTML="error fetching hint from ai"+error
+  }
+}
+loadPage();
 if(mode===false){
 startGame();
 }

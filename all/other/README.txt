@@ -1,7 +1,7 @@
-Launch Student Website Template
+Frontiers Student Website Template
 ================================
 
-This folder contains a simple 3-page website for Launch students.
+This folder contains a simple 3-page website for Frontiers students.
 
 Files
 -----

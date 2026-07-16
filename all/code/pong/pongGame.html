@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Game</title>
+    <link rel="stylesheet" href="../main/styles.css">
+    <link rel="stylesheet" href="pongGame.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+
+</head>
+<body>
+     <header>
+        <h1>Pong Game</h1>
+        <p class="tagline">Use w-s keys to control the left paddle
+            use up-down key to control the right paddle
+        </p>
+        </header>
+        <nav>
+            <a href="../main/html/index.html">Home</a>
+            <a href="../main/html/aboutme.html">About Me</a>
+            <a href="../main/html/mytown.html">My Town</a>
+            <a href="../numGame/numgame.html">Number Game</a>
+            <a href="../wordGame/wordGame.html">Word Game</a>
+            <a href="pongGame.html"> Pong Game</a>
+            <a href="../snake/snake.html">Snake</a>
+        </nav>
+
+        <main>
+            <section class="card">
+                <canvas id="gameboard" width="500" height="500">
+                </canvas>
+                <div id="scoreboard">0 : 0</div>
+                <button id="reset">Reset</button>
+            </section>
+                
+        </main>
+         <footer>
+    <p>Created by Mollie for Frontiers.</p>
+            <h4>🖤🩶🤍💜</h4>
+  </footer>
+  <script src="jsFiles/score.js" ></script>
+  <script src="jsFiles/paddle.js"></script>
+  <script src="jsFiles/ball.js"></script>
+  <script src="jsFiles/keyboardControl.js"></script>
+  <script src="jsFiles/pongGame.js"> </script>
+
+
+</body>
+</html>
