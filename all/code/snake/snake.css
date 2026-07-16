@@ -2,24 +2,25 @@ body{
     text-align: center;
     align-items: center;
 }
-.snake-card{
-    background-color: transparent;
-    border: none;
-    width: 500px;
+.snakeCard{
+    background-color: #3e187c;
+    border: double,#dbdbdb;
+    width: 700px;
     margin: 0 auto;
 }
 .heading{
-    background-color: #ff0075;
-    width: 100%;
+    background-color: #662aaa;
+    border: double,#dbdbdb;
+    width: 700px;
     padding: 20px;
     display:flex;
     justify-content:space-between;
     box-sizing:border-box;
 }
 #gameboard{
-    background-color: #6f6f6f;
-    height: 500px;
-    width: 100%;
+    background-color: #494949;
+    height: 700px;
+    width: 700px;
     display: grid;
     grid-template:repeat(16,1fr)/repeat(16,1fr);
 }
@@ -28,11 +29,14 @@ body{
 }
 #snake-name{margin: 0 auto;}
 button{
-    background-color: #b81c1c;
+    background-color: #3e187c;
+    color: #dbdbdb;
     padding: 5px;
     border-radius: 2px;
     margin: 0 auto;
 }
 button:hover{
+    background-color: #dbdbdb;
+    color: #3e187c;
     cursor: pointer;
 }

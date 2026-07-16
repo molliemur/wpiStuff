@@ -7,8 +7,8 @@ class Food{
 
 
     changeFoodPosition(side){
-        this.x=Math.floor((Math.random*side)+1);
-        this.y=Math.floor((Math.random*side)+1);
+        this.x=Math.floor(Math.random()*side)+1;
+        this.y=Math.floor(Math.random()*side)+1;
 
     }
     changeColor(color){

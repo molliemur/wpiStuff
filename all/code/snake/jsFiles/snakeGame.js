@@ -8,8 +8,7 @@ class SnakeGame{
         this.gridSide = 16;
 
         this.score = 0;
-        this.highScore=localStorage.getItem("highScore")||0
-        this.highScoreTag.innerText = `high score: ${this.highScore}`
+        this.highScore=Number(localStorage.getItem("highScore"))||0
         this.timerId=null;
 
         this.snakeX =this.randomPostition();
@@ -20,18 +19,27 @@ class SnakeGame{
 
         this.foodX=this.randomPostition();
         this.foodY=this.randomPostition();
-        if(this.foodX===this.snakeX && this.foodY===this.snakeY){
-          this.foodX=this.randomPostition();
-          this.foodY=this.randomPostition();
-        }
 
         this.createObjects();
+        this.placeFood();
         this.controls = new SnakeControls(this.snake)
-        this.draw;
-        this.start;
+        this.draw();
+        this.start();
+    }
+    updateScoreBoard(){
+        this.scoreTag.innerText=`Score:${this.score}`;
+        this.highScoreTag.innerText=`High Score: ${this.highScore}`;
+    }
+    increaseScore(points=1){
+        this.score+=points;
+        if(this.score>this.highScore){
+            this.highScore=this.score;
+            localStorage.setItem("highScore", String(this.highScore));
+        }
+        this.updateScoreBoard();
     }
 randomPostition(){
-    return Math.floor((Math.random()* this.gridSide)+1);
+    return Math.floor(Math.random()* this.gridSide)+1;
 }
 createObjects(){
     this.snake=new Snake(
@@ -39,13 +47,24 @@ createObjects(){
         this.snakeY,
         this.vx,
         this.vy,
-        "#ff0075"
+        "#dabc45"
     );
     this.food=new Food(
         this.foodX,
         this.foodY,
-        "#b81c1c"
+        "#fdbcb4","#317873","#662aaa"
     );
+}
+placeFood(){
+    do{
+        this.foodX=this.randomPostition();
+        this.foodY=this.randomPostition();
+    }while(this.isOccupied(this.foodX,this.foodY))
+        this.food.x=this.foodX;
+        this.food.y=this.foodY;
+}
+isOccupied(x,y){
+    return this.snake.snakeBody.some(([bodyX,bodyY])=>bodyX===x&&bodyY===y)
 }
 draw(){
     let foodHtml = `<div style="background-color: ${this.food.color}; grid-area:${this.food.y}/${this.food.x}"></div>`;
@@ -76,12 +95,14 @@ start(){
 gameLoop(side){
     if(this.snake.move(side)){
         this.gameOver();
+        return;
+    }
+    if(this.snake.headX===this.food.x && this.snake.headY === this.food.y){
+        this.placeFood();
+        this.snake.growSnake(this.food.x,this.food.y);
+        this.increaseScore();
     }
     this.draw();
-    if(this.snake.headX===this.food.x && this.snake.heady === this.food.y){
-        this.food.changeFoodPosition(this.gridSide);
-        this.snake.growSnake(this.food.x,this.food.y);
-    }
   }
 }
 window.addEventListener("DOMContentLoaded",()=>{

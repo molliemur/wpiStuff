@@ -17,11 +17,12 @@ class Snake{
         for(let i=this.snakeBody.length-1; i>0; i--){
             this.snakeBody[i]=this.snakeBody[i-1];
         }
-        this.snakeBody[0]=[this.headX,this,this.headY]
+        this.snakeBody[0]=[this.headX,this.headY]; 
         
         if(newX <=0||newY<=0||this.headX>side||this.headY>side){
             return true;
         }
+        return false;
     }
     moveUp(vx,vy){
         this.vx=vx;
@@ -47,8 +48,8 @@ class Snake{
         this.color=color;
     }
     changeHead(side){
-        this.headX=Math.floor(Math.random()*side)+1
-        this.headY=Math.floor(Math.random()*side)+1
+        this.headX=Math.floor(Math.random()*side)+1;
+        this.headY=Math.floor(Math.random()*side)+1;
 
     }
 }
