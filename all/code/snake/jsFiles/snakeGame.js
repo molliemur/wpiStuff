@@ -4,6 +4,16 @@ class SnakeGame{
         this.scoreTag=document.getElementById("currentScore")
         this.highScoreTag = document.getElementById("highScore")
 
+        this.customizer = document.getElementById("customize")
+        this.customButton=document.getElementById("customBtn")
+        this.submit=document.getElementById("customButton")
+        this.customButton.addEventListener("click",()=> this.showCustomModal())
+        this.submit.addEventListener("click",()=> this.submitCustom())
+
+        this.youLose = document.getElementById("gameOver");
+        this.close=document.getElementById("close");
+        this.close.addEventListener("click",()=> this.closeMenu())
+
 
         this.gridSide = 16;
 
@@ -26,6 +36,7 @@ class SnakeGame{
         this.draw();
         this.start();
     }
+    
     updateScoreBoard(){
         this.scoreTag.innerText=`Score:${this.score}`;
         this.highScoreTag.innerText=`High Score: ${this.highScore}`;
@@ -52,7 +63,7 @@ createObjects(){
     this.food=new Food(
         this.foodX,
         this.foodY,
-        "#fdbcb4","#317873","#662aaa"
+        "#fdbcb4"
     );
 }
 placeFood(){
@@ -82,12 +93,25 @@ drawSnake(){
     return snakeHtml;
 }
 gameOver(){
+    let myConfetti = null;
+if(window.confetti){
+    myConfetti= confetti.create(null, {
+        resize: true,
+        useWorker: true
+    });
+}
     if(this.timerId!==null){
         clearInterval(this.timerId);
         this.timerId=null;
     }
-    alert("Game Over!")
-    location.reload();
+    this.showGameOver()
+     if(myConfetti){
+            myConfetti({
+                particalCount:100,
+                spread:160
+            });
+        }
+    console.log("over")
 }
 start(){
     this.timerId=setInterval(()=>this.gameLoop(this.gridSide), this.snakeSpeed);
@@ -104,6 +128,48 @@ gameLoop(side){
     }
     this.draw();
   }
+  clearBoard(){
+    this.canvas.innerHTML=""
+  }
+showCustomModal(){
+    this.customizer.style.display="block";
+}
+submitCustom(){
+    this.customizer.style.display="none"
+    
+    let foodColor=document.getElementById("food-color")
+    this.food.changeColor(foodColor.value);
+
+    let snakeColor =document.getElementById("snake-color")
+    this.snake.changeColor(snakeColor.value);
+
+    let selectedBoard=document.querySelector("input[name='board-size']:checked")
+    let boardSizeValue = selectedBoard ? selectedBoard.value:16
+    this.canvas.style.gridTemplate=`repeat(${boardSizeValue},1fr)/repeat(${boardSizeValue},1fr)`
+    this.gridSide=boardSizeValue;
+    this.snake.changeHead(this.gridSide)
+    this.placeFood()
+
+    let selectedSpeed = document.querySelector("input[name='speed']:checked")
+    let speedValue = selectedSpeed ? selectedSpeed.value:120
+     if(this.timerId!==null){
+        clearInterval(this.timerId);
+        this.timerId=null;
+    }
+    this.snakeSpeed=speedValue
+    this.start();
+    this.clearBoard();
+    this.draw();
+}
+showGameOver(){
+        this.youLose.style.display="block";
+}
+closeMenu(){
+    this.youLose.style.display="none"
+        location.reload();
+
+}
+
 }
 window.addEventListener("DOMContentLoaded",()=>{
     new SnakeGame();

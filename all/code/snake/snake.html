@@ -35,6 +35,42 @@
             </div>
             <div id="gameboard"></div>
            </section>
+           <div class="modal" id="customize"> 
+            <div class="modal-content" id="custom-content">
+                <label for="food-color"> food color</label>
+                <input id="food-color" type="color" value="#fdbcb4">
+
+                <label for="snake-color"> snake color</label>
+                <input id="snake-color" type="color" value="#dabc45">
+                 <br>
+                 <input id="slow" type="radio" name="speed" value="220">
+                 <label for="slow">Slow</label>
+                 <input id="med" type="radio" name="speed" value="120">
+                 <label for="med">Medium</label>
+                 <input id="fast" type="radio" name="speed" value="75">
+                 <label for="fast">Fast</label>
+                 <input id="vfast" type="radio" name="speed" value="50">
+                 <label for="vfast">Turbo</label>
+                 <br>
+                <input id="small-board" type="radio" name="board-size" value=8>
+                <label for="small-board"> small</label>
+                <input id="med-board" type="radio" name="board-size" value=16>
+                <label for="med-board"> medium</label>
+                <input id="large-board" type="radio" name="board-size" value=32>
+                <label for="large-board"> large</label>
+                <input id="huge-board" type="radio" name="board-size" value=64>
+                <label for="huge-board"> huge</label>
+                 <br>
+                <button id="customButton">submit </button>
+            </div>
+           </div>
+           <div class="modal" id="gameOver">
+            <div class="modal-content" id="gameOver-content">
+                <h2> You lose</h2>
+                <br>
+                <button id="close">Close</button>
+            </div>
+           </div>
         </main>
          <footer>
     <p>Created by Mollie for Frontiers.</p>

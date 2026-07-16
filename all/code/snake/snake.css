@@ -36,7 +36,48 @@ button{
     margin: 0 auto;
 }
 button:hover{
-    background-color: #dbdbdb;
-    color: #3e187c;
+    background-color: #662aaa;
+    color: #dbdbdb;
     cursor: pointer;
+}
+.modal{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+   padding-top: 50px;
+   background-color: rgba(36,18,4,0.4);
+}
+.modal-content{
+    background-color: #662aaa;
+    margin: auto;
+    width: 70;
+    padding: 15px;
+    border: double,#dbdbdb;
+    border-radius: 8px;
+}
+#gameOver{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-content: center;
+
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+   background-color: rgba(36,18,4,0.4);
+}
+#gameOver-content{
+  background-color: #662aaa;
+  vertical-align: center;
+    margin: auto;
+    width: 750px;
+    padding: 15px;
+    border: double,#dbdbdb;
+    border-radius: 8px;
 }
